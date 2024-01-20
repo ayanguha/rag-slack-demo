@@ -1,0 +1,11 @@
+langchain==0.0.353
+langchain-community==0.0.7
+langchain-core==0.1.4
+langsmith==0.0.77
+numpy==1.24.4
+openai==1.6.1
+requests==2.31.0
+tiktoken==0.5.2
+urllib3==1.26.18
+pinecone-client==2.2.4
+opensearch-py==2.4.2
