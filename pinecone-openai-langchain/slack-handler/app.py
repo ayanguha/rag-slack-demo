@@ -25,6 +25,6 @@ def handler(event, context):
         msg = urllib.parse.unquote_plus(data['text'])
         response_url = urllib.parse.unquote(data['response_url'])
     body = {'msg': msg, 'response_url': response_url}
-    topicARN = os.getenv("topicARN")
-    response = client.publish(TopicArn = topicARN, Message = json.dumps(body))
+    ragTopicARN = os.getenv("ragTopicARN")
+    response = client.publish(TopicArn = ragTopicARN, Message = json.dumps(body))
     return {"text":"Received your question, will reply in a minute"}
