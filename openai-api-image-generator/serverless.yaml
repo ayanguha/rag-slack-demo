@@ -1,0 +1,38 @@
+service: image-generation-example-app
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: ap-southeast-2
+  stage: ${opt:stage, "dev"}
+  memorySize: 512 # optional, in MB, default is 1024
+  timeout: 60 # optional, in seconds, default is 6
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  topicName: image-example
+  pythonRequirements:
+    dockerizePip: true
+
+package:
+  individually: true
+  include:
+    - "img_gen.py"
+  exclude:
+    - "requirements.txt"
+    - "package.json"
+    - "package-lock.json"
+    - ".serverless/**"
+    - ".virtualenv/**"
+    - "node_modules/**"
+
+functions:
+  image_gen:
+    handler: img_gen.handler
+    environment:
+      STAGE: ${self:provider.stage}
+      OPENAI_API_KEY: ${param:OPENAI_API_KEY}
+    events:
+      - sns: arn:aws:sns:${aws:region}:${aws:accountId}:${self:custom.topicName}
