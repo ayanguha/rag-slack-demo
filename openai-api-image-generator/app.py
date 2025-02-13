@@ -8,7 +8,6 @@ from langchain_community.vectorstores import OpenSearchVectorSearch
 from opensearchpy import OpenSearch, RequestsHttpConnection
 
 
-
 opensearch_url="https://search-aws-rag-demo-1-s6mutuipz2ykdxhbgxiq2pnpca.aos.us-east-1.on.aws"
 service = "es"
 region = "us-east-1"
